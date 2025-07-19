@@ -12,113 +12,150 @@
       color: #c9d1d9;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      /* Removed overflow: hidden to allow natural scrolling on smaller screens */
+      /* Removido o padding do body para gerenciar o espaçamento dentro do wrapper */
+      overflow-x: hidden; /* Evita rolagem horizontal indesejada */
     }
-    .layout {
+
+    /* Container principal que organiza sidebar e main-content */
+    .page-wrapper {
       display: flex;
-      flex-direction: column; /* Stack sidebar and main content vertically on small screens */
-      min-height: 100vh; /* Use min-height to ensure content can expand */
+      flex-direction: column; /* Por padrão, empilha os elementos verticalmente (mobile first) */
+      min-height: 100vh; /* Garante que o wrapper ocupe a altura total da viewport */
     }
-    @media (min-width: 768px) { /* Apply sidebar layout on medium screens and up */
-      .layout {
-        flex-direction: row;
+
+    /* Regra para telas maiores: transforma em duas colunas */
+    @media (min-width: 992px) { /* A partir de 992px (large devices), layout de duas colunas */
+      .page-wrapper {
+        flex-direction: row; /* Alinha os elementos horizontalmente */
+        /* Alinhamento dos itens será controlado por suas posições */
       }
     }
+
+    /* Estilos da barra lateral */
     .sidebar {
-      width: 100%; /* Full width on mobile */
+      width: 100%; /* Largura total em mobile */
       background-color: #161b22;
-      padding: 20px 15px; /* Slightly less padding for mobile */
+      padding: 25px;
+      border-radius: 0; /* Removido border-radius para sidebar no mobile se estender de ponta a ponta */
       text-align: center;
+      flex-shrink: 0; /* Impede que a sidebar encolha */
+      position: relative; /* Para mobile, mantém o fluxo normal */
+      z-index: 10; /* Garante que a sidebar fique acima do conteúdo se houver sobreposição */
     }
-    @media (min-width: 768px) {
+
+    @media (min-width: 992px) {
       .sidebar {
-        width: 250px; /* Fixed width on desktop */
-        padding: 30px 15px;
-        flex-shrink: 0; /* Prevent sidebar from shrinking */
+        width: 300px; /* Largura fixa para a sidebar em desktop */
+        min-height: 100vh; /* Garante que a sidebar ocupe a altura total da viewport */
+        position: fixed; /* Fixa a sidebar na tela */
+        top: 0; /* Alinha ao topo */
+        left: 0; /* Alinha à esquerda */
+        border-radius: 0; /* Mantém sem border-radius para uma aparência mais integrada */
+        padding-top: 50px; /* Aumenta o padding superior para afastamento do topo */
       }
     }
+
     .profile-pic {
-      width: 120px; /* Slightly smaller on mobile */
+      width: 120px;
       height: 120px;
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid #238636;
       margin-bottom: 15px;
     }
-    @media (min-width: 768px) {
-      .profile-pic {
-        width: 150px;
-        height: 150px;
-        margin-bottom: 20px;
-      }
-    }
+
     .sidebar h1 {
-      font-size: 1.8rem; /* Slightly larger heading for better readability */
+      font-size: 1.8rem;
       margin-bottom: 5px;
     }
+
     .sidebar p {
       font-size: 0.95rem;
       margin-top: 0;
       margin-bottom: 5px;
     }
+
+    /* Estilos do conteúdo principal */
     .main-content {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 30px 20px; /* Adjusted padding for mobile */
+      flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
+      padding: 20px; /* Padding interno para o conteúdo */
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Espaço entre os "cards" principais */
+      padding-top: 20px; /* Padding superior padrão */
     }
-    @media (min-width: 768px) {
+
+    @media (min-width: 992px) {
       .main-content {
-        padding: 40px;
+        margin-left: 300px; /* Cria uma margem para compensar a largura da sidebar fixa */
+        padding-top: 50px; /* Aumenta o padding superior para ficar alinhado com a sidebar */
       }
     }
-    .card-custom {
+
+    /* Estilos para os cards de conteúdo */
+    .content-card {
       background-color: #161b22;
       border: none;
       border-radius: 1rem;
       color: #c9d1d9;
-      padding: 25px !important; /* Ensure consistent padding */
+      padding: 25px;
     }
+
+    .content-card h4 {
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    /* Estilo do botão primário */
     a.btn-primary {
       background-color: #238636;
       border: none;
-      padding: 8px 18px; /* Slightly smaller button for mobile */
-      font-size: 0.9rem;
+      padding: 10px 20px;
+      font-size: 1rem;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 0.5rem;
+      display: inline-block;
     }
-    @media (min-width: 768px) {
-      a.btn-primary {
-        padding: 10px 20px;
-        font-size: 1rem;
-      }
+    a.btn-primary:hover {
+        background-color: #2e9f45;
+        color: #fff;
     }
+
+    /* Estilos do rodapé */
     footer {
-      margin-top: 50px; /* Adjusted margin */
+      margin-top: 40px;
       text-align: center;
       padding: 20px;
       color: #8b949e;
-      font-size: 0.85rem; /* Smaller font for footer */
+      font-size: 0.85rem;
     }
+
+    /* Estilos da galeria de imagens */
     .gallery-img {
       width: 100%;
-      height: 200px; /* Fixed height for consistency */
-      object-fit: cover; /* Ensures images cover the area without distortion */
+      height: 200px;
+      object-fit: cover;
       border-radius: 0.5rem;
-      transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+      transition: transform 0.3s ease-in-out;
     }
+
     .gallery-img:hover {
-      transform: scale(1.03); /* Slightly reduced scale for subtler effect */
+      transform: scale(1.03);
     }
-    .gallery-item {
-      margin-bottom: 15px; /* Add margin between images on small screens */
+
+    /* Estilos para links dentro dos cards */
+    .content-card ul li a {
+      color: #238636;
+      text-decoration: none;
     }
-    @media (min-width: 576px) { /* Adjust column spacing for small breakpoints */
-        .col-sm-6.col-md-4 .gallery-item {
-            margin-bottom: 0;
-        }
+    .content-card ul li a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="layout">
+  <div class="page-wrapper">
     <div class="sidebar">
       <img src="https://rheyseder86.github.io/pagina-pessoal/6a938d37-0265-40d5-a5f7-8d2fa074814d.jpg" alt="Foto de perfil de Eder Prioli, um homem sorrindo com um fundo desfocado." class="profile-pic">
       <h1>Eder Prioli</h1>
@@ -128,56 +165,45 @@
     </div>
 
     <div class="main-content">
-      <div class="container mb-5">
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <div class="card card-custom p-4 h-100">
-              <h4>Sobre mim</h4>
-              <p>Sou especialista em Segurança da Informação, com foco em proteção de dados, testes de intrusão (Pentest), análise de vulnerabilidades e defesa cibernética. Atuo com visão estratégica e pensamento ofensivo para fortalecer defesas, antecipar riscos e transformar pontos fracos em aprendizados. Minha abordagem combina técnica, responsabilidade e ética, sempre com o objetivo de proteger sistemas — e principalmente, as pessoas por trás deles. Segurança, para mim, é mais do que conformidade: é entender a mente do atacante, falar a linguagem da tecnologia e agir com precisão onde mais importa.</p>
-            </div>
+      <div class="content-card" id="sobre-mim">
+        <h4>Sobre mim</h4>
+        <p>Sou especialista em Segurança da Informação, com foco em proteção de dados, testes de intrusão (Pentest), análise de vulnerabilidades e defesa cibernética. Atuo com visão estratégica e pensamento ofensivo para fortalecer defesas, antecipar riscos e transformar pontos fracos em aprendizados. Minha abordagem combina técnica, responsabilidade e ética, sempre com o objetivo de proteger sistemas — e principalmente, as pessoas por trás deles. Segurança, para mim, é mais do que conformidade: é entender a mente do atacante, falar a linguagem da tecnologia e agir com precisão onde mais importa.</p>
+      </div>
+
+      <div class="content-card" id="competencias">
+        <h4>Competências</h4>
+        <ul>
+          <li>Testes de Invasão (Pentest)</li>
+          <li>Análise de Vulnerabilidades</li>
+          <li>Hardening de Servidores</li>
+          <li>Monitoramento e Resposta a Incidentes</li>
+          <li>Segurança em Redes e Sistemas</li>
+          <li>Auditoria e Conformidade (LGPD, ISO 27001)</li>
+        </ul>
+      </div>
+
+      <div class="content-card" id="galeria">
+        <h4 class="mb-4">Cibersegurança em Ação</h4>
+        <div class="row g-4 justify-content-center">
+          <div class="col-sm-6 col-md-4">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyejR4eHdhYjYxem84cTZsdzJtcTQwdDU4MHd1dzIyMTJ1N2pydzF6byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2i7jspnRBYgg6v4Oki/source.gif" class="gallery-img" alt="Animação de conceitos de cibersegurança">
           </div>
-          <div class="col-md-6 mb-4">
-            <div class="card card-custom p-4 h-100">
-              <h4>Competências</h4>
-              <ul>
-                <li>Testes de Invasão (Pentest)</li>
-                <li>Análise de Vulnerabilidades</li>
-                <li>Hardening de Servidores</li>
-                <li>Monitoramento e Resposta a Incidentes</li>
-                <li>Segurança em Redes e Sistemas</li>
-                <li>Auditoria e Conformidade (LGPD, ISO 27001)</li>
-              </ul>
-            </div>
+          <div class="col-sm-6 col-md-4">
+            <img src="https://tuacarreira.com/wp-content/uploads/2018/02/quanto-ganha-um-analista-de-sistemas.jpg" class="gallery-img" alt="Analista de sistemas trabalhando em um computador">
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <img src="https://miro.medium.com/v2/resize:fit:996/1*RKJ0I8cJk9QL8jAXRvqaDQ.gif" class="gallery-img" alt="Animação de código e segurança cibernética">
           </div>
         </div>
       </div>
 
-      <div class="container mb-5">
-        <div class="card card-custom p-4">
-          <h4 class="mb-4">Cibersegurança</h4>
-          <div class="row g-4 justify-content-center">
-            <div class="col-sm-6 col-md-4 gallery-item">
-              <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyejR4eHdhYjYxem84cTZsdzJtcTQwdDU4MHd1dzIyMTJ1N2pydzF6byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2i7jspnRBYgg6v4Oki/source.gif" class="gallery-img">
-            </div>
-            <div class="col-sm-6 col-md-4 gallery-item">
-              <img src="https://tuacarreira.com/wp-content/uploads/2018/02/quanto-ganha-um-analista-de-sistemas.jpg" class="gallery-img">
-            </div>
-            <div class="col-sm-6 col-md-4 gallery-item">
-              <img src="https://miro.medium.com/v2/resize:fit:996/1*RKJ0I8cJk9QL8jAXRvqaDQ.gif" class="gallery-img">
-            </div>
-            </div>
-        </div>
-      </div>
-
-      <div id="contato" class="container mb-5">
-        <div class="card card-custom p-4">
-          <h4>Contato</h4>
-          <p>Você pode entrar em contato por e-mail ou redes sociais profissionais.</p>
-          <ul>
-            <li>Email: <a href="mailto:prioli.eder75@protonmail.com" class="text-success">prioli.eder75@protonmail.com</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/ederprioli" class="text-success" target="_blank">linkedin.com/in/ederprioli</a></li>
-          </ul>
-        </div>
+      <div class="content-card" id="contato">
+        <h4>Contato</h4>
+        <p>Você pode entrar em contato por e-mail ou redes sociais profissionais.</p>
+        <ul>
+          <li>Email: <a href="mailto:prioli.eder75@protonmail.com" class="text-success">prioli.eder75@protonmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/ederprioli" class="text-success" target="_blank">linkedin.com/in/ederprioli</a></li>
+        </ul>
       </div>
 
       <footer>
