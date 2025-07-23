@@ -1,150 +1,244 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eder Prioli</title>
+  <meta name="description" content="Página profissional de Eder Prioli - Analista de Cibersegurança e Hacker Ético">
+  <title>ER</title>
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3524/3524377.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      background-color: #0d1117;
+      color: #c9d1d9;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 0;
-      display: flex;
-      height: 100vh;
-      background-color: #111;
-      color: #f2f2f2;
+      overflow-x: hidden;
     }
-    .sidebar {
-      width: 250px;
-      background-color: #1a1a1a;
-      padding: 30px 20px;
+
+    .page-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+      min-height: 100vh;
     }
-    .sidebar h1:first-of-type {
-      font-family: 'Courier New', monospace;
-      position: relative;
+
+    @media (min-width: 992px) {
+      .page-wrapper {
+        flex-direction: row;
+      }
     }
-    .sidebar h1:first-of-type::after {
-      content: ' ';
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #ff0055;
-      clip: rect(0, 0, 0, 0);
-      animation: glitch 1s infinite linear alternate-reverse;
-    }
-    @keyframes glitch {
-      0% { clip: rect(42px, 9999px, 44px, 0); }
-      10% { clip: rect(12px, 9999px, 16px, 0); }
-      20% { clip: rect(52px, 9999px, 54px, 0); }
-      30% { clip: rect(32px, 9999px, 36px, 0); }
-      40% { clip: rect(72px, 9999px, 74px, 0); }
-      100% { clip: rect(12px, 9999px, 14px, 0); }
-    }
-    .sidebar h1, .sidebar p {
-      margin: 10px 0;
+
+    .sidebar {
+      width: 100%;
+      background-color: #161b22;
+      padding: 25px;
       text-align: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
     }
-    .content {
-      flex: 1;
-      padding: 40px;
-      overflow-y: auto;
+
+    @media (min-width: 992px) {
+      .sidebar {
+        width: 300px;
+        min-height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 50px;
+      }
     }
-    .content h2 {
-      margin-top: 0;
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #238636;
+      margin-bottom: 15px;
     }
+
+    .sidebar h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .sidebar p {
+      font-size: 0.95rem;
+      margin: 0 0 5px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 20px;
+    }
+
+    @media (min-width: 992px) {
+      .main-content {
+        margin-left: 300px;
+        padding-top: 50px;
+      }
+    }
+
     .content-card {
-      background-color: #1a1a1a;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
+      background-color: #161b22;
+      border: none;
+      border-radius: 1rem;
+      color: #c9d1d9;
+      padding: 25px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.6s forwards ease-out;
     }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .content-card h4 {
-      margin: 0 0 10px 0;
-      color: #ccc;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
     }
-    .content-card ul {
-      list-style: none;
-      padding-left: 0;
+
+    a.btn-primary {
+      background-color: #238636;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 0.5rem;
+      display: inline-block;
     }
-    .content-card ul li::before {
-      content: '•';
-      color: #4caf50;
-      margin-right: 8px;
+
+    a.btn-primary:hover {
+      background-color: #2e9f45;
+      color: #fff;
     }
+
     footer {
-      padding: 20px;
+      margin-top: 40px;
       text-align: center;
-      font-size: 14px;
-      position: relative;
+      padding: 20px;
+      color: #8b949e;
+      font-size: 0.85rem;
     }
-    footer img {
-      opacity: 0.05;
-      width: 100px;
+
+    .gallery-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.03);
+    }
+
+    .content-card ul li a {
+      color: #2ea043;
+      text-decoration: none;
+    }
+
+    .content-card ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .visually-hidden {
       position: absolute;
-      right: 10px;
-      bottom: 10px;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
     }
   </style>
-  <!-- wake up, Eder. this isn't a dream. -->
 </head>
-<body>
-  <div class="sidebar">
-    <h1>Eder Prioli</h1>
-    <p>Analista de Segurança da Informação</p>
+
+<body id="topo">
+  <div class="page-wrapper">
+    <div class="sidebar">
+      <img src="https://rheyseder86.github.io/pagina-pessoal/eder.jpg" onerror="this.onerror=null; this.src='img/fallback.jpg';" alt="Foto de perfil de Eder Prioli" class="profile-pic">
+       <h1>Alderson</h1>
+      <h1>Eder Ribeiro</h1>
+      <p>Analista de Cibersegurança</p>
+      <p>Hacker Ético</p>
+      <a href="#contato" class="btn btn-primary mt-3" aria-label="Ir para seção de contato">Contato</a>
+    </div>
+
+    <main class="main-content">
+      <h2 class="visually-hidden">Conteúdo principal</h2>
+
+      <section class="content-card" id="sobre-mim">
+        <h4>Sobre mim</h4>
+        <p>Sou analista de Cibersegurança [...]</p>
+      </section>
+
+      <section class="content-card" id="competencias">
+        <h4>Competências</h4>
+        <ul>
+          <li>Testes de Invasão (Pentest)</li>
+          <li>Análise de Vulnerabilidades</li>
+          <li>Hardening de Servidores</li>
+          <li>Monitoramento e Resposta a Incidentes</li>
+          <li>Segurança em Redes e Sistemas</li>
+          <li>Auditoria e Conformidade (LGPD, ISO 27001)</li>
+        </ul>
+      </section>
+
+      <section class="content-card" id="galeria">
+        <h4 class="mb-4">Cibersegurança em Ação</h4>
+        <!-- Galeria -->
+      </section>
+
+      <section class="content-card" id="livros">
+        <h4>Currículo</h4>
+        <ul>
+          <li><a href="https://lattes.cnpq.br/1429564725419946" target="_blank" rel="noopener noreferrer">Currículo Lattes</a></li>
+        </ul>
+      </section>
+
+      <section class="content-card" id="contato">
+        <h4>Contato</h4>
+        <ul>
+          <li>Email: <a href="mailto:alderson.eder86@protonmail.com">mailto:alderson.eder86@protonmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/ederribeiro86" target="_blank" rel="noopener noreferrer">linkedin.com/in/ederprioli</a></li>
+          <li>Whatsapp: <a href="34 9 9110 6738">34 9 9110 6738</a></li>
+        </ul>
+      </section>
+
+      <footer>
+        &copy; 2025 Eder Ribeiro. Todos os direitos reservados.
+      </footer>
+    </main>
   </div>
-  <div class="content">
-    <h2>Sobre Mim</h2>
-    <div class="content-card">
-      <p>Sou analista de segurança da informação com paixão por física quântica, mistérios e sistemas complexos. Curioso por natureza e sempre em busca do que está por trás da superfície.</p>
-    </div>
 
-    <div class="content-card">
-      <h4>Habilidades Técnicas</h4>
-      <ul>
-        <li>Segurança da Informação</li>
-        <li>Engenharia de Dados</li>
-        <li>Criptografia</li>
-        <li>Redes de Computadores</li>
-        <li>Linux, Windows, Sistemas embarcados</li>
-        <li>Python, SQL, Bash</li>
-      </ul>
-    </div>
-
-    <div class="content-card">
-      <h4>Currículo</h4>
-      <ul>
-        <li><a href="https://rheyseder86.github.io/pagina-pessoal/curriculo_eder_prioli.pdf" target="_blank">Download do Currículo em PDF</a></li>
-        <li><a href="https://lattes.cnpq.br/1429564725419946" target="_blank">Visualizar Currículo Lattes</a></li>
-      </ul>
-    </div>
-
-    <div class="content-card">
-      <h4>Mensagem do Sistema</h4>
-      <p><code>root@alderson:~# acesso concedido</code></p>
-    </div>
-  </div>
-
-  <footer>
-    &copy; 2025 Eder Ribeiro. Todos os direitos reservados.
-    <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Elliot_Alderson.jpg" alt="Elliot">
-  </footer>
-
-  <script>
-    console.log("Hello, friend. You’ve been watching, haven’t you?");
-    let input = "";
-    document.addEventListener("keydown", (e) => {
-      input += e.key.toLowerCase();
-      if (input.includes("fsociety")) {
-        alert("Welcome to the revolution, Eder.");
-        input = "";
-      }
-      if (input.length > 20) input = input.slice(-10);
-    });
-  </script>
+  <a href="#topo" class="btn btn-primary back-to-top">&uarr;</a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
